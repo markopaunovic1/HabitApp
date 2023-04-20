@@ -14,6 +14,10 @@
 		AF584CB929F1744500D2B4A0 /* HabitappTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF584CB829F1744500D2B4A0 /* HabitappTests.swift */; };
 		AF584CC329F1744500D2B4A0 /* HabitappUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF584CC229F1744500D2B4A0 /* HabitappUITests.swift */; };
 		AF584CC529F1744500D2B4A0 /* HabitappUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF584CC429F1744500D2B4A0 /* HabitappUITestsLaunchTests.swift */; };
+		AF584CD329F174EF00D2B4A0 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = AF584CD229F174EF00D2B4A0 /* FirebaseAuth */; };
+		AF584CD529F174EF00D2B4A0 /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = AF584CD429F174EF00D2B4A0 /* FirebaseDatabase */; };
+		AF584CD729F174EF00D2B4A0 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = AF584CD629F174EF00D2B4A0 /* FirebaseFirestore */; };
+		AF584CD929F174EF00D2B4A0 /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = AF584CD829F174EF00D2B4A0 /* FirebaseFirestoreSwift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +55,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AF584CD529F174EF00D2B4A0 /* FirebaseDatabase in Frameworks */,
+				AF584CD329F174EF00D2B4A0 /* FirebaseAuth in Frameworks */,
+				AF584CD729F174EF00D2B4A0 /* FirebaseFirestore in Frameworks */,
+				AF584CD929F174EF00D2B4A0 /* FirebaseFirestoreSwift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -143,6 +151,12 @@
 			dependencies = (
 			);
 			name = Habitapp;
+			packageProductDependencies = (
+				AF584CD229F174EF00D2B4A0 /* FirebaseAuth */,
+				AF584CD429F174EF00D2B4A0 /* FirebaseDatabase */,
+				AF584CD629F174EF00D2B4A0 /* FirebaseFirestore */,
+				AF584CD829F174EF00D2B4A0 /* FirebaseFirestoreSwift */,
+			);
 			productName = Habitapp;
 			productReference = AF584CA429F1744400D2B4A0 /* Habitapp.app */;
 			productType = "com.apple.product-type.application";
@@ -215,6 +229,9 @@
 				Base,
 			);
 			mainGroup = AF584C9B29F1744400D2B4A0;
+			packageReferences = (
+				AF584CD129F174EF00D2B4A0 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+			);
 			productRefGroup = AF584CA529F1744400D2B4A0 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -577,6 +594,40 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		AF584CD129F174EF00D2B4A0 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 10.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		AF584CD229F174EF00D2B4A0 /* FirebaseAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = AF584CD129F174EF00D2B4A0 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAuth;
+		};
+		AF584CD429F174EF00D2B4A0 /* FirebaseDatabase */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = AF584CD129F174EF00D2B4A0 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseDatabase;
+		};
+		AF584CD629F174EF00D2B4A0 /* FirebaseFirestore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = AF584CD129F174EF00D2B4A0 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestore;
+		};
+		AF584CD829F174EF00D2B4A0 /* FirebaseFirestoreSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = AF584CD129F174EF00D2B4A0 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestoreSwift;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = AF584C9C29F1744400D2B4A0 /* Project object */;
 }
