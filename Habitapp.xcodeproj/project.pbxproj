@@ -18,6 +18,9 @@
 		AF584CD529F174EF00D2B4A0 /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = AF584CD429F174EF00D2B4A0 /* FirebaseDatabase */; };
 		AF584CD729F174EF00D2B4A0 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = AF584CD629F174EF00D2B4A0 /* FirebaseFirestore */; };
 		AF584CD929F174EF00D2B4A0 /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = AF584CD829F174EF00D2B4A0 /* FirebaseFirestoreSwift */; };
+		AF584CDB29F28CF300D2B4A0 /* Habits.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF584CDA29F28CF300D2B4A0 /* Habits.swift */; };
+		AF584CDD29F2904600D2B4A0 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = AF584CDC29F2904600D2B4A0 /* GoogleService-Info.plist */; };
+		AF584CDF29F2920C00D2B4A0 /* HabitsVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF584CDE29F2920C00D2B4A0 /* HabitsVM.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,6 +51,9 @@
 		AF584CBE29F1744500D2B4A0 /* HabitappUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = HabitappUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		AF584CC229F1744500D2B4A0 /* HabitappUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitappUITests.swift; sourceTree = "<group>"; };
 		AF584CC429F1744500D2B4A0 /* HabitappUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitappUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		AF584CDA29F28CF300D2B4A0 /* Habits.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Habits.swift; sourceTree = "<group>"; };
+		AF584CDC29F2904600D2B4A0 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		AF584CDE29F2920C00D2B4A0 /* HabitsVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitsVM.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,10 +108,13 @@
 		AF584CA629F1744400D2B4A0 /* Habitapp */ = {
 			isa = PBXGroup;
 			children = (
+				AF584CDC29F2904600D2B4A0 /* GoogleService-Info.plist */,
 				AF584CA729F1744400D2B4A0 /* HabitappApp.swift */,
 				AF584CA929F1744400D2B4A0 /* ContentView.swift */,
 				AF584CAB29F1744500D2B4A0 /* Assets.xcassets */,
 				AF584CAD29F1744500D2B4A0 /* Preview Content */,
+				AF584CDA29F28CF300D2B4A0 /* Habits.swift */,
+				AF584CDE29F2920C00D2B4A0 /* HabitsVM.swift */,
 			);
 			path = Habitapp;
 			sourceTree = "<group>";
@@ -250,6 +259,7 @@
 			files = (
 				AF584CAF29F1744500D2B4A0 /* Preview Assets.xcassets in Resources */,
 				AF584CAC29F1744500D2B4A0 /* Assets.xcassets in Resources */,
+				AF584CDD29F2904600D2B4A0 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -275,7 +285,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				AF584CAA29F1744400D2B4A0 /* ContentView.swift in Sources */,
+				AF584CDB29F28CF300D2B4A0 /* Habits.swift in Sources */,
 				AF584CA829F1744400D2B4A0 /* HabitappApp.swift in Sources */,
+				AF584CDF29F2920C00D2B4A0 /* HabitsVM.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
