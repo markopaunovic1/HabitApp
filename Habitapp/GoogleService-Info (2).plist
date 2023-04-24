@@ -3,32 +3,32 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>780158566616-m7ngq7hkbea36pi2dcc1n4eh920j3h7f.apps.googleusercontent.com</string>
+	<string>579409594527-5tbc9san288he6o6u16k338l56g0lqco.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.780158566616-m7ngq7hkbea36pi2dcc1n4eh920j3h7f</string>
+	<string>com.googleusercontent.apps.579409594527-5tbc9san288he6o6u16k338l56g0lqco</string>
 	<key>API_KEY</key>
-	<string>AIzaSyDz8gHsJUvY3h0GufWuSeLwA1oM3Cv6UZI</string>
+	<string>AIzaSyCKgjUK4VA7Yo341W349OV13ebPkaKcWo0</string>
 	<key>GCM_SENDER_ID</key>
-	<string>780158566616</string>
+	<string>579409594527</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
 	<string>com.example.Habitapp</string>
 	<key>PROJECT_ID</key>
-	<string>shoppinglist-swiftui-ccc8d</string>
+	<string>habitapp-f6eed</string>
 	<key>STORAGE_BUCKET</key>
-	<string>shoppinglist-swiftui-ccc8d.appspot.com</string>
+	<string>habitapp-f6eed.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
-	<false/>
+	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
-	<false/>
+	<false></false>
 	<key>IS_APPINVITE_ENABLED</key>
-	<true/>
+	<true></true>
 	<key>IS_GCM_ENABLED</key>
-	<true/>
+	<true></true>
 	<key>IS_SIGNIN_ENABLED</key>
-	<true/>
+	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:780158566616:ios:8bba801cd93d6ca9d157ad</string>
+	<string>1:579409594527:ios:6622b24bf6a477d4bc3aaa</string>
 </dict>
 </plist>

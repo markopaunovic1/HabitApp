@@ -60,13 +60,61 @@ struct SignInView : View {
 }
 
 struct HabitsListView : View {
+    
+    @StateObject var habitsVM = HabitsVM()
+    @State var showAddHabit = false
+    @State var newHabit = ""
+    let db = Firestore.firestore()
+    
     var body: some View {
-        Text("hej")
+        VStack {
+            List {
+                ForEach(habitsVM.habits) { habit in
+                    RowView(habit: habit, vm: habitsVM)
+                }
+                .onDelete() { indexSet in
+                    for index in indexSet {
+                        habitsVM.deleteHabit(index: index)
+                    }
+                }
+            }
+            Button {
+                showAddHabit = true
+            } label: {
+                Text("Add")
+            }
+            .alert("Add", isPresented: $showAddHabit) {
+                TextField("Add", text: $newHabit)
+                Button("Add", action: {
+                    habitsVM.saveHabits(habit: newHabit)
+                    newHabit = ""
+                })
+            }
+        }.onAppear() {
+            habitsVM.habitChanges()
+        }
+    }
+}
+
+struct RowView: View {
+    let habit : Habit
+    let vm : HabitsVM
+    
+    var body: some View {
+        HStack {
+            Text(habit.nameOfHabit)
+            Spacer()
+            Button {
+                vm.toggle(habit: habit)
+            } label: {
+                Image(systemName: habit.done ? "checkmark.square" : "square")
+            }
+        }
     }
 }
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        HabitsListView()
     }
 }
