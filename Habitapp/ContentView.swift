@@ -64,57 +64,73 @@ struct HabitsListView : View {
     @StateObject var habitsVM = HabitsVM()
     @State var showAddHabit = false
     @State var newHabit = ""
+    
+    init() {
+        UITableView.appearance().backgroundColor = .init(UIColor(red: 146/255, green: 200/255, blue: 253/255, alpha: 1))
+    }
+    
     let db = Firestore.firestore()
     
     var body: some View {
-        VStack {
-            List {
-                ForEach(habitsVM.habits) { habit in
-                    RowView(habit: habit, vm: habitsVM)
-                }
-                .onDelete() { indexSet in
-                    for index in indexSet {
-                        habitsVM.deleteHabit(index: index)
+        ZStack {
+            VStack {
+                List {
+                    ForEach(habitsVM.habits) { habit in
+                        RowView(habit: habit, vm: habitsVM)
+                            .listRowBackground(Color(red: 146/255, green: 200/255, blue: 253/255))
+                            .font(.system(size: 20))
+                            .padding(10)
+                            .bold()
+                        
+                    }
+                    .onDelete() { indexSet in
+                        for index in indexSet {
+                            habitsVM.deleteHabit(index: index)
+                        }
                     }
                 }
+                .alert("Add", isPresented: $showAddHabit) {
+                    TextField("Add new habit", text: $newHabit)
+                    Button("Add", action: {
+                        habitsVM.saveHabits(habit: newHabit)
+                        newHabit = ""
+                    })
+                    Button("Cancel", action: {
+                        newHabit = ""
+                    })
+                }
+                Button {
+                    showAddHabit = true
+                } label: {
+                    Text("Add")
+                }
+            }.onAppear() {
+                habitsVM.habitChanges()
             }
-            Button {
-                showAddHabit = true
-            } label: {
-                Text("Add")
-            }
-            .alert("Add", isPresented: $showAddHabit) {
-                TextField("Add", text: $newHabit)
-                Button("Add", action: {
-                    habitsVM.saveHabits(habit: newHabit)
-                    newHabit = ""
-                })
-            }
-        }.onAppear() {
-            habitsVM.habitChanges()
         }
     }
-}
-
-struct RowView: View {
-    let habit : Habit
-    let vm : HabitsVM
     
-    var body: some View {
-        HStack {
-            Text(habit.nameOfHabit)
-            Spacer()
-            Button {
-                vm.toggle(habit: habit)
-            } label: {
-                Image(systemName: habit.done ? "checkmark.square" : "square")
+    struct RowView: View {
+        let habit : Habit
+        let vm : HabitsVM
+        
+        var body: some View {
+            HStack {
+                Text(habit.nameOfHabit)
+                Spacer()
+                Button {
+                    vm.toggle(habit: habit)
+                } label: {
+                    Image(systemName: habit.done ? "checkmark.square" : "square")
+                        .foregroundColor(.white)
+                }
             }
         }
     }
-}
-
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        HabitsListView()
+    
+    struct ContentView_Previews: PreviewProvider {
+        static var previews: some View {
+            HabitsListView()
+        }
     }
 }
