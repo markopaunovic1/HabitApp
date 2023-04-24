@@ -15,7 +15,7 @@ struct ContentView: View {
         if !signeIn {
             SignInView(signedIn: $signeIn)
         } else {
-            HabitsView()
+            HabitsListView()
         }
     }
 }
@@ -59,7 +59,7 @@ struct SignInView : View {
     }
 }
 
-struct HabitsView : View {
+struct HabitsListView : View {
     var body: some View {
         Text("hej")
     }
