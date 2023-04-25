@@ -77,6 +77,7 @@ struct HabitsListView : View {
                 List {
                     ForEach(habitsVM.habits) { habit in
                         RowView(habit: habit, vm: habitsVM)
+                        
                             .listRowBackground(Color(red: 146/255, green: 200/255, blue: 253/255))
                             .font(.system(size: 20))
                             .padding(10)
@@ -89,6 +90,8 @@ struct HabitsListView : View {
                         }
                     }
                 }
+                
+                // pops up so user can add a habit
                 .alert("Add", isPresented: $showAddHabit) {
                     TextField("Add new habit", text: $newHabit)
                     Button("Add", action: {
@@ -99,6 +102,7 @@ struct HabitsListView : View {
                         newHabit = ""
                     })
                 }
+                
                 Button {
                     showAddHabit = true
                 } label: {
@@ -116,13 +120,22 @@ struct HabitsListView : View {
         
         var body: some View {
             HStack {
-                Text(habit.nameOfHabit)
+                if habit.nameOfHabit.count > 15 {
+                    Text(habit.nameOfHabit.prefix(15) + "...")
+                } else {
+                    Text(habit.nameOfHabit)
+                }
                 Spacer()
                 Button {
                     vm.toggle(habit: habit)
                 } label: {
-                    Image(systemName: habit.done ? "checkmark.square" : "square")
-                        .foregroundColor(.white)
+                    HStack {
+                        Text(" 23🔥")
+                            .padding(5)
+                            .font(.system(size: 15))
+                        Image(systemName: habit.done ? "checkmark.square" : "square")
+                            .foregroundColor(.white)
+                    }
                 }
             }
         }
