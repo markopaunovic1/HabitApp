@@ -21,6 +21,7 @@
 		AF584CDB29F28CF300D2B4A0 /* Habits.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF584CDA29F28CF300D2B4A0 /* Habits.swift */; };
 		AF584CDF29F2920C00D2B4A0 /* HabitsVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF584CDE29F2920C00D2B4A0 /* HabitsVM.swift */; };
 		AF584CE729F6CDCE00D2B4A0 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = AF584CE629F6CDCE00D2B4A0 /* GoogleService-Info.plist */; };
+		AF584CE929F8709700D2B4A0 /* Calendar.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF584CE829F8709700D2B4A0 /* Calendar.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -54,6 +55,7 @@
 		AF584CDA29F28CF300D2B4A0 /* Habits.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Habits.swift; sourceTree = "<group>"; };
 		AF584CDE29F2920C00D2B4A0 /* HabitsVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HabitsVM.swift; sourceTree = "<group>"; };
 		AF584CE629F6CDCE00D2B4A0 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		AF584CE829F8709700D2B4A0 /* Calendar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Calendar.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -115,6 +117,7 @@
 				AF584CAD29F1744500D2B4A0 /* Preview Content */,
 				AF584CDA29F28CF300D2B4A0 /* Habits.swift */,
 				AF584CDE29F2920C00D2B4A0 /* HabitsVM.swift */,
+				AF584CE829F8709700D2B4A0 /* Calendar.swift */,
 			);
 			path = Habitapp;
 			sourceTree = "<group>";
@@ -288,6 +291,7 @@
 				AF584CDB29F28CF300D2B4A0 /* Habits.swift in Sources */,
 				AF584CA829F1744400D2B4A0 /* HabitappApp.swift in Sources */,
 				AF584CDF29F2920C00D2B4A0 /* HabitsVM.swift in Sources */,
+				AF584CE929F8709700D2B4A0 /* Calendar.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

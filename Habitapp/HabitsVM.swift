@@ -11,14 +11,16 @@ import Firebase
 class HabitsVM : ObservableObject {
     let db = Firestore.firestore()
     let auth = Auth.auth()
+    let getStreaks = CalendarTracker()
+    let isDone = false
     
     @Published var habits = [Habit]()
     
-    func saveHabits(habit: String) {
+    func saveHabits(habit: String, streak: Int) {
         guard let user = auth.currentUser else {return}
         let habitRef = db.collection("users").document(user.uid).collection("habits")
         
-        let habit = Habit(nameOfHabit: habit)
+        let habit = Habit(nameOfHabit: habit, days: streak)
         do {
             try habitRef.addDocument(from: habit)
         } catch {
@@ -58,6 +60,13 @@ class HabitsVM : ObservableObject {
                 }
             }
         }
+    }
+    
+    func getStreaks(streak: Habit) {
+        guard let user = auth.currentUser else {return}
+        let habitRef = db.collection("users").document(user.uid).collection("habits")
+        
+        
     }
     
     func deleteHabit(index: Int) {

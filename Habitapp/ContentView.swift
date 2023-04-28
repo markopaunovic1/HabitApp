@@ -64,10 +64,8 @@ struct HabitsListView : View {
     @StateObject var habitsVM = HabitsVM()
     @State var showAddHabit = false
     @State var newHabit = ""
-    
-    init() {
-        UITableView.appearance().backgroundColor = .init(UIColor(red: 146/255, green: 200/255, blue: 253/255, alpha: 1))
-    }
+    @State var streak = CalendarTracker()
+    //@EnvironmentObject var dateHolder : Date
     
     let db = Firestore.firestore()
     
@@ -76,37 +74,39 @@ struct HabitsListView : View {
             VStack {
                 List {
                     ForEach(habitsVM.habits) { habit in
-                        RowView(habit: habit, vm: habitsVM)
-                        
+                        RowView(habit: habit, vm: habitsVM, calendar: streak)
                             .listRowBackground(Color(red: 146/255, green: 200/255, blue: 253/255))
                             .font(.system(size: 20))
                             .padding(10)
                             .bold()
-                        
                     }
                     .onDelete() { indexSet in
                         for index in indexSet {
                             habitsVM.deleteHabit(index: index)
                         }
                     }
+                    HStack {
+                        Spacer()
+                        HStack{
+                            Button("Add habit") {
+                                showAddHabit = true
+                            }
+                            Image(systemName: "plus.circle")
+                                .foregroundColor(.blue)
+                        }
+                        Spacer()
+                    }
                 }
-                
                 // pops up so user can add a habit
-                .alert("Add", isPresented: $showAddHabit) {
-                    TextField("Add new habit", text: $newHabit)
+                .alert("New habit", isPresented: $showAddHabit) {
+                    TextField("Title", text: $newHabit)
                     Button("Add", action: {
-                        habitsVM.saveHabits(habit: newHabit)
+                        habitsVM.saveHabits(habit: newHabit, streak: 0)
                         newHabit = ""
                     })
                     Button("Cancel", action: {
                         newHabit = ""
                     })
-                }
-                
-                Button {
-                    showAddHabit = true
-                } label: {
-                    Text("Add")
                 }
             }.onAppear() {
                 habitsVM.habitChanges()
@@ -115,22 +115,31 @@ struct HabitsListView : View {
     }
     
     struct RowView: View {
+        
         let habit : Habit
         let vm : HabitsVM
+        //let day : Date
+        var calendar : CalendarTracker
         
         var body: some View {
+            
+           // var format = day.formatted()
+            
             HStack {
                 if habit.nameOfHabit.count > 15 {
-                    Text(habit.nameOfHabit.prefix(15) + "...")
+                    Text(habit.nameOfHabit.prefix(14) + "...")
                 } else {
                     Text(habit.nameOfHabit)
                 }
                 Spacer()
+                //Text(Date.now, format: .dateTime.day())
                 Button {
                     vm.toggle(habit: habit)
+                    
+                        calendar.CheckStreak()
                 } label: {
                     HStack {
-                        Text(" 23🔥")
+                        Text("\(calendar.currentStreak)🔥")
                             .padding(5)
                             .font(.system(size: 15))
                         Image(systemName: habit.done ? "checkmark.square" : "square")
@@ -140,6 +149,14 @@ struct HabitsListView : View {
             }
         }
     }
+    
+    //    struct addNewHabit : View {
+    //        var newHabit : AddNewHabit
+    //
+    //        var body: some View {
+    //
+    //        }
+    //    }
     
     struct ContentView_Previews: PreviewProvider {
         static var previews: some View {
