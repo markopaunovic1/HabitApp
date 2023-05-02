@@ -16,46 +16,55 @@ class CalendarTracker {
     
     var currentStreak : Int = 0
     
-    func currentDay() -> Int {
+    func currentDay() -> String {
         let date = Date()
         let calendar = Calendar.current
         let currentDay = calendar.component(.day, from: date)
         
+        
         let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "d MMM"
+        print("\(dateFormatter.string(from: Date())) : TODAY")
         
-        dateFormatter.dateFormat = "d"
+       // let today = Calendar.current.dateComponents([.day], from: date))
         
-         return currentDay
+        return dateFormatter.string(from: Date())
+        
     }
     
-    func nextDay() -> Int{
+    func yesterDay() -> String {
         let date = Date()
         let calendar = Calendar.current
-        let nextDay = calendar.component(.day, from: date)
+        //let nextDay = calendar.component(.day, from: date)
         
-        print("\(nextDay)")
-        return nextDay + 1
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "d MMM"
+        
+        
+        let yesterDay = Calendar.current.date(byAdding: .day, value: -1, to: Date())
+         print("\(dateFormatter.string(from: yesterDay!)) : YESTERDAY")
+        return dateFormatter.string(from: yesterDay!)
         
         
     }
     
-    func CheckStreak() {
+    func CheckStreak(habit: Habit) {
         
         guard let user = auth.currentUser else {return}
-        let habitRef = db.collection("users").document(user.uid).collection("habits").document("days")
+        let habitRef = db.collection("users").document(user.uid).collection("habits")
 
         
-        if currentDay() != nextDay() {
-            currentStreak += 1
-//            habitRef.updateData(["days" : FieldValue.increment(Int64(1))
-//                                ])
-            
-            
+        if currentDay() != yesterDay() {
+            if let id = habit.id {
+                habitRef.document(id).updateData(["currentStreak" : FieldValue.increment(Int64(1))
+                                                  ])
+            }
         } else {
+            print("error adding streak")
         }
         
 //        habitRef.updateData(["days" : FieldValue.increment(Int64(1))
 //                            ])
-        print(habitRef)
+        //print(yesterDay())
     }
 }

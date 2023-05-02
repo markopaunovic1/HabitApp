@@ -20,7 +20,7 @@ class HabitsVM : ObservableObject {
         guard let user = auth.currentUser else {return}
         let habitRef = db.collection("users").document(user.uid).collection("habits")
         
-        let habit = Habit(nameOfHabit: habit, days: streak)
+        let habit = Habit(nameOfHabit: habit, currentStreak: streak)
         do {
             try habitRef.addDocument(from: habit)
         } catch {
@@ -62,10 +62,15 @@ class HabitsVM : ObservableObject {
         }
     }
     
-    func getStreaks(streak: Habit) {
+    func getStreaks(habit: Habit) {
         guard let user = auth.currentUser else {return}
         let habitRef = db.collection("users").document(user.uid).collection("habits")
+    
         
+        if let id = habit.id {
+            habitRef.document(id).updateData(["currentStreak" : FieldValue.increment(Int64(1))
+                                                                          ])
+        }
         
     }
     

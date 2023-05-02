@@ -65,7 +65,6 @@ struct HabitsListView : View {
     @State var showAddHabit = false
     @State var newHabit = ""
     @State var streak = CalendarTracker()
-    //@EnvironmentObject var dateHolder : Date
     
     let db = Firestore.firestore()
     
@@ -116,14 +115,11 @@ struct HabitsListView : View {
     
     struct RowView: View {
         
-        let habit : Habit
+        var habit : Habit
         let vm : HabitsVM
-        //let day : Date
-        var calendar : CalendarTracker
+        let calendar : CalendarTracker
         
         var body: some View {
-            
-           // var format = day.formatted()
             
             HStack {
                 if habit.nameOfHabit.count > 15 {
@@ -132,14 +128,13 @@ struct HabitsListView : View {
                     Text(habit.nameOfHabit)
                 }
                 Spacer()
-                //Text(Date.now, format: .dateTime.day())
                 Button {
                     vm.toggle(habit: habit)
+                    calendar.CheckStreak(habit: habit)
                     
-                        calendar.CheckStreak()
                 } label: {
                     HStack {
-                        Text("\(calendar.currentStreak)🔥")
+                        Text("\(habit.currentStreak)")
                             .padding(5)
                             .font(.system(size: 15))
                         Image(systemName: habit.done ? "checkmark.square" : "square")
@@ -149,15 +144,7 @@ struct HabitsListView : View {
             }
         }
     }
-    
-    //    struct addNewHabit : View {
-    //        var newHabit : AddNewHabit
-    //
-    //        var body: some View {
-    //
-    //        }
-    //    }
-    
+
     struct ContentView_Previews: PreviewProvider {
         static var previews: some View {
             HabitsListView()

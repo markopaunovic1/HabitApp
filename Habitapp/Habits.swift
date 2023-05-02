@@ -12,7 +12,7 @@ struct Habit : Codable, Identifiable {
     
     @DocumentID var id : String?
     var nameOfHabit : String
-    var days : Int = 0
+    var currentStreak : Int = 0
     //var dates : [Date]
     var weeks : Int = 0
     var done : Bool = false
