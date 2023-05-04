@@ -20,6 +20,7 @@ struct ContentView: View {
     }
 }
 
+// *MARK: Sign in View for Anonymous user
 struct SignInView : View {
     @Binding var signedIn : Bool
     var auth = Auth.auth()
@@ -65,6 +66,7 @@ struct HabitsListView : View {
     @State var showAddHabit = false
     @State var newHabit = ""
     @State var streak = CalendarTracker()
+    @State var isChecked = false
     
     let db = Firestore.firestore()
     
@@ -73,12 +75,14 @@ struct HabitsListView : View {
             VStack {
                 List {
                     ForEach(habitsVM.habits) { habit in
-                        RowView(habit: habit, vm: habitsVM, calendar: streak)
+                        RowView(habit: habit, vm: habitsVM, calendar: streak, isChecked: $isChecked)
+                            .disabled(habit.done)
                             .listRowBackground(Color(red: 146/255, green: 200/255, blue: 253/255))
                             .font(.system(size: 20))
                             .padding(10)
                             .bold()
                     }
+                    // *MARK: User slides to left for a Option to delete habit
                     .onDelete() { indexSet in
                         for index in indexSet {
                             habitsVM.deleteHabit(index: index)
@@ -96,7 +100,7 @@ struct HabitsListView : View {
                         Spacer()
                     }
                 }
-                // pops up so user can add a habit
+                // *MARK: pops up view for user to add a habit
                 .alert("New habit", isPresented: $showAddHabit) {
                     TextField("Title", text: $newHabit)
                     Button("Add", action: {
@@ -114,37 +118,43 @@ struct HabitsListView : View {
     }
     
     struct RowView: View {
-        
         var habit : Habit
+        
         let vm : HabitsVM
         let calendar : CalendarTracker
         
+        @Binding var isChecked: Bool
+        
         var body: some View {
-            
             HStack {
-                if habit.nameOfHabit.count > 15 {
-                    Text(habit.nameOfHabit.prefix(14) + "...")
+                if habit.nameOfHabit.count > 20 {
+                    Text(habit.nameOfHabit.prefix(19) + "...")
                 } else {
                     Text(habit.nameOfHabit)
                 }
                 Spacer()
                 Button {
-                    vm.toggle(habit: habit)
-                    calendar.CheckStreak(habit: habit)
-                    
                 } label: {
                     HStack {
-                        Text("\(habit.currentStreak)")
-                            .padding(5)
-                            .font(.system(size: 15))
+                        if habit.currentStreak >= 1 {
+                            Text("\(habit.currentStreak)🔥")
+                                .padding(5)
+                                .font(.system(size: 15))
+                        }
                         Image(systemName: habit.done ? "checkmark.square" : "square")
-                            .foregroundColor(.white)
+                            .onTapGesture {
+                                vm.toggle(habit: habit)
+                            }
                     }
                 }
             }
+            .onAppear() {
+                vm.resetToggle(habit: habit)
+                calendar.checkStreak(habit: habit)
+            }
         }
     }
-
+    
     struct ContentView_Previews: PreviewProvider {
         static var previews: some View {
             HabitsListView()

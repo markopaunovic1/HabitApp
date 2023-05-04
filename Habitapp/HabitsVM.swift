@@ -13,14 +13,17 @@ class HabitsVM : ObservableObject {
     let auth = Auth.auth()
     let getStreaks = CalendarTracker()
     let isDone = false
+    var date = Date()
+    var calendar = Calendar.current
     
     @Published var habits = [Habit]()
     
+    // *MARK: Saves new habits to a list
     func saveHabits(habit: String, streak: Int) {
         guard let user = auth.currentUser else {return}
         let habitRef = db.collection("users").document(user.uid).collection("habits")
         
-        let habit = Habit(nameOfHabit: habit, currentStreak: streak)
+        let habit = Habit(nameOfHabit: habit, currentStreak: streak, latestDone: Date())
         do {
             try habitRef.addDocument(from: habit)
         } catch {
@@ -28,15 +31,39 @@ class HabitsVM : ObservableObject {
         }
     }
     
+    // *MARK: Updating values when toggled is pressed
     func toggle(habit : Habit) {
         guard let user = auth.currentUser else {return}
         let habitRef = db.collection("users").document(user.uid).collection("habits")
         
         if let id = habit.id {
             habitRef.document(id).updateData(["done" : !habit.done])
+            
+            habitRef.document(id).updateData(["currentStreak" : FieldValue.increment(Int64(1))])
+            
+            habitRef.document(id).updateData(["latestDone" :Timestamp(date: date)
+                                             ])
         }
     }
     
+    // *MARK: Reseting toggle day after habit is completed
+    func resetToggle(habit : Habit) {
+        guard let user = auth.currentUser else {return}
+        let habitRef = db.collection("users").document(user.uid).collection("habits")
+        
+        let today = Date()
+        
+        if let updateToggle = calendar.dateComponents([.day], from: habit.latestDone , to: today).day {
+            
+            if updateToggle >= 1 {
+                if let id = habit.id {
+                    habitRef.document(id).updateData(["done" : false])
+                }
+            }
+        }
+    }
+    
+    // *MARK: Listens to new habit changes
     func habitChanges() {
         guard let user = auth.currentUser else {return}
         let habitRef = db.collection("users").document(user.uid).collection("habits")
@@ -62,18 +89,7 @@ class HabitsVM : ObservableObject {
         }
     }
     
-    func getStreaks(habit: Habit) {
-        guard let user = auth.currentUser else {return}
-        let habitRef = db.collection("users").document(user.uid).collection("habits")
-    
-        
-        if let id = habit.id {
-            habitRef.document(id).updateData(["currentStreak" : FieldValue.increment(Int64(1))
-                                                                          ])
-        }
-        
-    }
-    
+    // *MARK: Deletes habit function
     func deleteHabit(index: Int) {
         guard let user = auth.currentUser else {return}
         let habitRef = db.collection("users").document(user.uid).collection("habits")

@@ -10,10 +10,12 @@ import FirebaseFirestoreSwift
 
 struct Habit : Codable, Identifiable {
     
+    // *MARK:
+    
     @DocumentID var id : String?
     var nameOfHabit : String
     var currentStreak : Int = 0
-    //var dates : [Date]
     var weeks : Int = 0
     var done : Bool = false
+    var latestDone : Date
 }
