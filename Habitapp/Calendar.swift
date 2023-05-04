@@ -8,7 +8,6 @@
 import Foundation
 import Firebase
 
-
 class CalendarTracker {
     
     let auth = Auth.auth()
@@ -22,14 +21,14 @@ class CalendarTracker {
         let habitRef = db.collection("users").document(user.uid).collection("habits")
         let today = Date()
         
-        var newStreak = habit.currentStreak
+        var currentStreak = habit.currentStreak
         if let latestDone = calendar.dateComponents([.day], from: habit.latestDone , to: today).day {
             
             if latestDone > 1 {
-                newStreak = 0
+                currentStreak = 0
                 
                 if let id = habit.id {
-                    habitRef.document(id).updateData(["currentStreak" : newStreak])
+                    habitRef.document(id).updateData(["currentStreak" : currentStreak])
                 }
             }
         }

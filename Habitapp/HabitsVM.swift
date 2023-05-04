@@ -37,12 +37,10 @@ class HabitsVM : ObservableObject {
         let habitRef = db.collection("users").document(user.uid).collection("habits")
         
         if let id = habit.id {
-            habitRef.document(id).updateData(["done" : !habit.done])
             
-            habitRef.document(id).updateData(["currentStreak" : FieldValue.increment(Int64(1))])
-            
-            habitRef.document(id).updateData(["latestDone" :Timestamp(date: date)
-                                             ])
+            habitRef.document(id).updateData(["done" : !habit.done,
+                                              "currentStreak" : FieldValue.increment(Int64(1)),
+                                              "latestDone" :Timestamp(date: date)])
         }
     }
     
