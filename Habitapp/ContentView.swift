@@ -140,6 +140,7 @@ struct HabitsListView : View {
                             Text("\(habit.currentStreak)🔥")
                                 .padding(5)
                                 .font(.system(size: 15))
+                                .foregroundColor(.black)
                         }
                         Image(systemName: habit.done ? "checkmark.square" : "square")
                             .onTapGesture {
